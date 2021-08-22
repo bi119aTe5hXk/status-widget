@@ -18,6 +18,7 @@
 		3401774C23D325DD00369905 /* StatusWidgetPreferencePane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3401774923D325DD00369905 /* StatusWidgetPreferencePane.swift */; };
 		34E6A27E2558706B002693EA /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34E6A27D2558706B002693EA /* Media.xcassets */; };
 		34E6A281255874FA002693EA /* SLangItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E6A280255874FA002693EA /* SLangItem.swift */; };
+		474C52DD26D161650000FD17 /* SNetworkItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C52DC26D161650000FD17 /* SNetworkItem.swift */; };
 		C1D0E7696EB2EC07C7557D36 /* Pods_Status.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3712FB53353E8D66C89087DD /* Pods_Status.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +42,7 @@
 		34E6A27D2558706B002693EA /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		34E6A280255874FA002693EA /* SLangItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SLangItem.swift; sourceTree = "<group>"; };
 		3712FB53353E8D66C89087DD /* Pods_Status.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Status.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		474C52DC26D161650000FD17 /* SNetworkItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNetworkItem.swift; sourceTree = "<group>"; };
 		9347816283C4AB2AF67D68D4 /* Pods-Status.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Status.release.xcconfig"; path = "Target Support Files/Pods-Status/Pods-Status.release.xcconfig"; sourceTree = "<group>"; };
 		CB926D07BCC33E6C4950E6CD /* Pods-Status.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Status.debug.xcconfig"; path = "Target Support Files/Pods-Status/Pods-Status.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -104,6 +106,7 @@
 				34E6A280255874FA002693EA /* SLangItem.swift */,
 				3401773723D3241000369905 /* SPowerItem.swift */,
 				3401773823D3241000369905 /* SWifiItem.swift */,
+				474C52DC26D161650000FD17 /* SNetworkItem.swift */,
 			);
 			path = Items;
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				474C52DD26D161650000FD17 /* SNetworkItem.swift in Sources */,
 				3401773923D3241000369905 /* SClockItem.swift in Sources */,
 				3401773523D323CD00369905 /* StatusItem.swift in Sources */,
 				3401774C23D325DD00369905 /* StatusWidgetPreferencePane.swift in Sources */,
@@ -415,10 +419,10 @@
 			baseConfigurationReference = CB926D07BCC33E6C4950E6CD /* Pods-Status.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_IDENTITY = "Developer ID Application";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 788D9WZ9Z3;
+				DEVELOPMENT_TEAM = HR66SGQEZ4;
 				INFOPLIST_FILE = Status/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Application\\ Support/Pock/Widgets";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pigigaldi.pock.Status;
@@ -434,10 +438,10 @@
 			baseConfigurationReference = 9347816283C4AB2AF67D68D4 /* Pods-Status.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_IDENTITY = "Developer ID Application";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 788D9WZ9Z3;
+				DEVELOPMENT_TEAM = HR66SGQEZ4;
 				INFOPLIST_FILE = Status/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Application\\ Support/Pock/Widgets";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pigigaldi.pock.Status;

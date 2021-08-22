@@ -20,6 +20,7 @@ class StatusWidget: PKWidget {
     private var statusElements: [StatusItem] = [
         SLangItem(),
 		SWifiItem(),
+        SNetworkItem(),
         SPowerItem(),
         SClockItem()
     ]
