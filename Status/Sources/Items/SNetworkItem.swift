@@ -11,13 +11,15 @@ import Defaults
 
 internal class SNetworkItem: StatusItem {
     
-    
+    private var refreshTimer: Timer?
+    /// UI
+    private let imageView: NSImageView = NSImageView(frame: NSRect(x: 0, y: 0, width: 80, height: 26))
     
     var enabled: Bool{ return Defaults[.shouldShowNetworkItem] }
     
     var title: String  { return "network" }
     
-    var view: NSView { return NSView.init() }
+    var view: NSView { return imageView }
     
     init() {
         didLoad()
@@ -32,14 +34,26 @@ internal class SNetworkItem: StatusItem {
     }
     
     func reload() {
-        //TODO
+        let bandwidth = getNetworkBandwidth(interface: getCurrentlyUsedInterface())
+        let networkBandwidthUp = convertToCorrectUnit(bytes: UInt64(bandwidth.up))
+        let networkBandwidthDown = convertToCorrectUnit(bytes: UInt64(bandwidth.down))
+
+        let menuBarImage = createMenuBarImage(up: networkBandwidthUp, down: networkBandwidthDown)
+         
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.imageView.image = menuBarImage
+        }
     }
     func didLoad() {
-        //TODO
+        refreshTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [weak self] _ in
+            self?.reload()
+        })
     }
     
     func didUnload() {
-        //TODO
+        refreshTimer?.invalidate()
+        refreshTimer = nil
     }
     
     
@@ -213,7 +227,104 @@ internal class SNetworkItem: StatusItem {
             case Petabyte = "PB"
             case Exabyte = "EB"
         }
+    
+    /**
+     * Creates an attributed string that can be drawn on the menu bar image.
+     */
+    private func createAttributedBandwidthString(value: String, unit: String) -> NSAttributedString {
+        // create the attributed string
+        let attrString = NSMutableAttributedString(string: value + " " + unit)
 
+        // define the font for the number value and the unit
+        let font = NSFont.systemFont(ofSize: 9)
+
+        // add the attributes
+        attrString.addAttribute(.font, value: font, range: NSRange(location: 0, length: attrString.length - 1 - unit.count))
+        attrString.addAttribute(.kern, value: 1.2, range: NSRange(location: 0, length: attrString.length - 1 - unit.count))
+        attrString.addAttribute(.font, value: font, range: NSRange(location: attrString.length - unit.count, length: unit.count))
+        let fontColor = NSColor.white//ThemeManager.isDarkTheme() ? NSColor.white : NSColor.black
+        attrString.addAttribute(.foregroundColor, value: fontColor, range: NSRange(location: 0, length: attrString.length))
+
+        return attrString
+    }
+    
+    /**
+     * Returns the image that can be rendered on the menu bar.
+     */
+    private func createMenuBarImage(up: (value: Double, unit: ByteUnit), down: (value: Double, unit: ByteUnit)) -> NSImage? {
+        let valueStringUp = up.unit < .Megabyte ? String(Int(up.value)) : String(format: "%.2f", up.value)
+        let valueStringDown = down.unit < .Megabyte ? String(Int(down.value)) : String(format: "%.2f", down.value)
+
+        // create the attributed strings for the upload and download
+        let uploadString = self.createAttributedBandwidthString(value: valueStringUp, unit: up.unit.rawValue + "/s")
+        let downloadString = self.createAttributedBandwidthString(value: valueStringDown, unit: down.unit.rawValue + "/s")
+
+        // get the up arrow icon
+        
+        guard let arrowUpIcon = Bundle(for: StatusWidget.self).image(forResource: "ArrowUpIcon")?.tint(color: NSColor.white) else {
+            print("An error occurred while loading the bandwidth arrow up menu bar icon")
+            return nil
+        }
+        // get the down arrow icon
+        
+        guard let arrowDownIcon = Bundle(for: StatusWidget.self).image(forResource: "ArrowDownIcon")?.tint(color: NSColor.white) else {
+            print("An error occurred while loading the bandwidth arrow down menu bar icon")
+            return nil
+        }
+
+        // create the menu bar image for the bandwidth.
+        let bandwidthTextWidth = max(CGFloat(55), max(uploadString.size().width, downloadString.size().width))
+        let arrowIconWidth = arrowUpIcon.size.width
+        let marginToIcons = CGFloat(5)
+        let menuBarImage = NSImage(
+            size: NSSize(
+                width: bandwidthTextWidth + arrowIconWidth + marginToIcons,
+                height: CGFloat(18.0)
+            )
+        )
+
+        // focus the image to render the bandwidth values
+        menuBarImage.lockFocus()
+
+        // draw the upload string
+        let uploadStringSize = uploadString.size()
+        uploadString.draw(
+            at: NSPoint(
+                x: arrowIconWidth + marginToIcons + bandwidthTextWidth - uploadStringSize.width,
+                y: menuBarImage.size.height - 11 // this value was found by trail and error
+            )
+        )
+
+        // draw the download string
+        let downloadStringsize = downloadString.size()
+        // y value was found by trail and error
+        downloadString.draw(at: NSPoint(x: arrowIconWidth + marginToIcons + bandwidthTextWidth - downloadStringsize.width, y: -2))
+
+        // draw the bandwidth icon in front of the upload and download string
+        arrowUpIcon.draw(
+            at: NSPoint(
+                    x: 0,
+                    y: CGFloat(18.0) - (arrowUpIcon.size.height + (CGFloat(18.0) / 2.0 - arrowUpIcon.size.height))
+                ),
+            from: NSRect.zero,
+            operation: .sourceOver,
+            fraction: 1.0
+        )
+        arrowDownIcon.draw(
+            at: NSPoint(
+                    x: 0,
+                    y: CGFloat(18.0) / 2.0 - arrowDownIcon.size.height
+                ),
+            from: NSRect.zero,
+            operation: .sourceOver,
+            fraction: 1.0
+        )
+
+        // unlock the focous of drawing
+        menuBarImage.unlockFocus()
+
+        return menuBarImage
+    }
     
 }
 

@@ -17,6 +17,7 @@ class StatusWidgetPreferencePane: NSViewController, NSTextFieldDelegate, PKWidge
     /// UI
 	@IBOutlet weak var showLangItem:			  NSButton!
     @IBOutlet weak var showWifiItem:              NSButton!
+    @IBOutlet weak var showNetowrkItem:           NSButton!
     @IBOutlet weak var showPowerItem:             NSButton!
     @IBOutlet weak var showBatteryIconItem:       NSButton!
     @IBOutlet weak var showBatteryPercentageItem: NSButton!
@@ -35,6 +36,7 @@ class StatusWidgetPreferencePane: NSViewController, NSTextFieldDelegate, PKWidge
     private func loadCheckboxState() {
 		self.showLangItem.state              = Defaults[.shouldShowLangItem]          ? .on : .off
 		self.showWifiItem.state              = Defaults[.shouldShowWifiItem]          ? .on : .off
+        self.showNetowrkItem.state           = Defaults[.shouldShowNetworkItem]       ? .on : .off
         self.showPowerItem.state             = Defaults[.shouldShowPowerItem]         ? .on : .off
         self.showBatteryIconItem.state       = Defaults[.shouldShowBatteryIcon]       ? .on : .off
         self.showBatteryPercentageItem.state = Defaults[.shouldShowBatteryPercentage] ? .on : .off
@@ -49,12 +51,14 @@ class StatusWidgetPreferencePane: NSViewController, NSTextFieldDelegate, PKWidge
         case 1:
             key = .shouldShowWifiItem
         case 2:
-            key = .shouldShowPowerItem
-        case 21:
-            key = .shouldShowBatteryIcon
-        case 22:
-            key = .shouldShowBatteryPercentage
+            key = .shouldShowNetworkItem
         case 3:
+            key = .shouldShowPowerItem
+        case 31:
+            key = .shouldShowBatteryIcon
+        case 32:
+            key = .shouldShowBatteryPercentage
+        case 4:
             key = .shouldShowDateItem
         default:
             return
