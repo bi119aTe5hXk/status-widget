@@ -154,7 +154,7 @@ internal class SNetworkItem: StatusItem {
                 return "en0"
             }
 
-            print("Output of the network interface command: \n\(commandOutput)")
+            //print("Output of the network interface command: \n\(commandOutput)")
 
             // get the interface name
             let interfaceName = commandOutput.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -231,7 +231,7 @@ internal class SNetworkItem: StatusItem {
     /**
      * Creates an attributed string that can be drawn on the menu bar image.
      */
-    private func createAttributedBandwidthString(value: String, unit: String) -> NSAttributedString {
+    private func createAttributedBandwidthString(value: String, unit: String, color: NSColor) -> NSAttributedString {
         // create the attributed string
         let attrString = NSMutableAttributedString(string: value + " " + unit)
 
@@ -242,7 +242,7 @@ internal class SNetworkItem: StatusItem {
         attrString.addAttribute(.font, value: font, range: NSRange(location: 0, length: attrString.length - 1 - unit.count))
         attrString.addAttribute(.kern, value: 1.2, range: NSRange(location: 0, length: attrString.length - 1 - unit.count))
         attrString.addAttribute(.font, value: font, range: NSRange(location: attrString.length - unit.count, length: unit.count))
-        let fontColor = NSColor.white//ThemeManager.isDarkTheme() ? NSColor.white : NSColor.black
+        let fontColor = color//ThemeManager.isDarkTheme() ? NSColor.white : NSColor.black
         attrString.addAttribute(.foregroundColor, value: fontColor, range: NSRange(location: 0, length: attrString.length))
 
         return attrString
@@ -256,18 +256,18 @@ internal class SNetworkItem: StatusItem {
         let valueStringDown = down.unit < .Megabyte ? String(Int(down.value)) : String(format: "%.2f", down.value)
 
         // create the attributed strings for the upload and download
-        let uploadString = self.createAttributedBandwidthString(value: valueStringUp, unit: up.unit.rawValue + "/s")
-        let downloadString = self.createAttributedBandwidthString(value: valueStringDown, unit: down.unit.rawValue + "/s")
+        let uploadString = self.createAttributedBandwidthString(value: valueStringUp, unit: up.unit.rawValue + "/s", color:NSColor.green)
+        let downloadString = self.createAttributedBandwidthString(value: valueStringDown, unit: down.unit.rawValue + "/s", color:NSColor.red)
 
         // get the up arrow icon
         
-        guard let arrowUpIcon = Bundle(for: StatusWidget.self).image(forResource: "ArrowUpIcon")?.tint(color: NSColor.white) else {
+        guard let arrowUpIcon = Bundle(for: StatusWidget.self).image(forResource: "ArrowUpIcon")?.tint(color: NSColor.green) else {
             print("An error occurred while loading the bandwidth arrow up menu bar icon")
             return nil
         }
         // get the down arrow icon
         
-        guard let arrowDownIcon = Bundle(for: StatusWidget.self).image(forResource: "ArrowDownIcon")?.tint(color: NSColor.white) else {
+        guard let arrowDownIcon = Bundle(for: StatusWidget.self).image(forResource: "ArrowDownIcon")?.tint(color: NSColor.red) else {
             print("An error occurred while loading the bandwidth arrow down menu bar icon")
             return nil
         }
