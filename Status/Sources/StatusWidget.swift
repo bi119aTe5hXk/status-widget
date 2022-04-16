@@ -47,6 +47,9 @@ class StatusWidget: PKWidget {
 		if Preferences[.shouldShowWifiItem] {
 			stackView.addArrangedSubview(SWifiItem().view)
 		}
+        if Preferences[.shouldShowNetworkItem] {
+            stackView.addArrangedSubview(SNetworkItem().view)
+        }
 		if Preferences[.shouldShowPowerItem] {
 			stackView.addArrangedSubview(SPowerItem().view)
 		}
@@ -112,6 +115,11 @@ class StatusWidget: PKWidget {
 			loadedItems.append(item)
 			stackView.addArrangedSubview(item.view)
 		}
+        if Preferences[.shouldShowNetworkItem] {
+            let item = SNetworkItem()
+            loadedItems.append(item)
+            stackView.addArrangedSubview(item.view)
+        }
 		if Preferences[.shouldShowPowerItem] {
 			let item = SPowerItem()
 			loadedItems.append(item)

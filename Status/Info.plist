@@ -23,8 +23,8 @@
 	<key>NSPrincipalClass</key>
 	<string>Status.StatusWidget</string>
 	<key>PKWidgetAuthor</key>
-	<string>Pierluigi Galdi</string>
+	<string>Pierluigi Galdi. Mod by bi119aTe5hXk.</string>
 	<key>PKWidgetPreferenceClass</key>
-	<string>Status.StatusWidgetPreferencePane2</string>
+	<string>Status.StatusWidgetPreferencePane</string>
 </dict>
 </plist>
