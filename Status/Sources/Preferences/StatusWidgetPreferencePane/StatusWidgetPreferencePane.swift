@@ -7,7 +7,6 @@
 //
 
 import Cocoa
-import Defaults
 import PockKit
 
 class StatusWidgetPreferencePane: NSViewController, NSTextFieldDelegate, PKWidgetPreference {
@@ -24,13 +23,19 @@ class StatusWidgetPreferencePane: NSViewController, NSTextFieldDelegate, PKWidge
     @IBOutlet weak var showDateItem:              NSButton!
     @IBOutlet weak var timeFormatTextField:       NSTextField!
     
+    func reset() {
+        Preferences.reset()
+        loadCheckboxState()
+        NotificationCenter.default.post(name: .shouldReloadStatusWidget, object: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.superview?.wantsLayer = true
         self.view.wantsLayer = true
         self.loadCheckboxState()
         self.timeFormatTextField.delegate = self
-        self.timeFormatTextField.stringValue = Defaults[.timeFormatTextField]
+        self.timeFormatTextField.stringValue = Preferences[.timeFormatTextField]
     }
     
     private func loadCheckboxState() {
@@ -44,7 +49,7 @@ class StatusWidgetPreferencePane: NSViewController, NSTextFieldDelegate, PKWidge
     }
     
     @IBAction func didChangeCheckboxValue(_ checkbox: NSButton) {
-        var key: Defaults.Key<Bool>
+		var key: Preferences.Keys
         switch checkbox.tag {
 		case 0:
 			key = .shouldShowLangItem
@@ -63,8 +68,8 @@ class StatusWidgetPreferencePane: NSViewController, NSTextFieldDelegate, PKWidge
         default:
             return
         }
-        Defaults[key] = checkbox.state == .on
-        NSWorkspace.shared.notificationCenter.post(name: .shouldReloadStatusWidget, object: nil)
+		Preferences[key] = checkbox.state == .on
+		NotificationCenter.default.post(name: .shouldReloadStatusWidget, object: nil)
     }
     
     @IBAction func openTimeFormatHelpURL(_ sender: NSButton) {
@@ -73,6 +78,6 @@ class StatusWidgetPreferencePane: NSViewController, NSTextFieldDelegate, PKWidge
     }
     
     func controlTextDidChange(_ obj: Notification) {
-        Defaults[.timeFormatTextField] = timeFormatTextField.stringValue
+		Preferences[.timeFormatTextField] = timeFormatTextField.stringValue
     }
 }

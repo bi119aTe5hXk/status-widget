@@ -6,19 +6,59 @@
 //  Copyright © 2020 Pierluigi Galdi. All rights reserved.
 //
 
-import Defaults
+import Foundation
 
 extension NSNotification.Name {
     static let shouldReloadStatusWidget = NSNotification.Name("shouldReloadStatusWidget")
 }
 
-extension Defaults.Keys {
-	static let shouldShowLangItem		   = Defaults.Key<Bool>("shouldShowLangItem",		   default: true)
-    static let shouldShowWifiItem          = Defaults.Key<Bool>("shouldShowWifiItem",          default: true)
-    static let shouldShowNetworkItem       = Defaults.Key<Bool>("shouldShowNetworkItem",       default: true)
-    static let shouldShowPowerItem         = Defaults.Key<Bool>("shouldShowPowerItem",         default: true)
-    static let shouldShowBatteryIcon       = Defaults.Key<Bool>("shouldShowBatteryIcon",       default: true)
-    static let shouldShowBatteryPercentage = Defaults.Key<Bool>("shouldShowBatteryPercentage", default: true)
-    static let shouldShowDateItem          = Defaults.Key<Bool>("shouldShowDateItem",          default: true)
-    static let timeFormatTextField         = Defaults.Key<String>("timeFormatTextField",       default: "EE dd MMM HH:mm")
+internal struct Preferences {
+    internal enum Keys: String {
+        case shouldShowLangItem
+        case shouldShowWifiItem
+        case shouldShowNetworkItem
+        case shouldShowPowerItem
+        case shouldShowBatteryIcon
+        case shouldShowBatteryPercentage
+        case shouldShowDateItem
+        case timeFormatTextField
+    }
+    static subscript<T>(_ key: Keys) -> T {
+        get {
+            guard let value = UserDefaults.standard.value(forKey: key.rawValue) as? T else {
+                switch key {
+                case .shouldShowLangItem:
+                    return false as! T
+                case .shouldShowWifiItem:
+                    return true as! T
+                case .shouldShowNetworkItem:
+                    return true as! T
+                case .shouldShowPowerItem:
+                    return true as! T
+                case .shouldShowBatteryIcon:
+                    return true as! T
+                case .shouldShowBatteryPercentage:
+                    return false as! T
+                case .shouldShowDateItem:
+                    return true as! T
+                case .timeFormatTextField:
+                    return "EE dd MMM HH:mm" as! T
+                }
+            }
+            return value
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: key.rawValue)
+        }
+    }
+    static func reset() {
+        Preferences[.shouldShowLangItem] = false
+        Preferences[.shouldShowWifiItem] = true
+        Preferences[.shouldShowNetworkItem] = true
+        Preferences[.shouldShowPowerItem] = true
+        Preferences[.shouldShowBatteryIcon] = true
+        Preferences[.shouldShowBatteryPercentage] = true
+        Preferences[.shouldShowDateItem] = true
+        Preferences[.timeFormatTextField] = "EE dd MMM HH:mm"
+    }
 }
