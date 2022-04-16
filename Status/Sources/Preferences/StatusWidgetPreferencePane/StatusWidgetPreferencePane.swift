@@ -8,6 +8,7 @@
 
 import Cocoa
 import PockKit
+import Defaults
 
 class StatusWidgetPreferencePane: NSViewController, NSTextFieldDelegate, PKWidgetPreference {
     
@@ -39,13 +40,13 @@ class StatusWidgetPreferencePane: NSViewController, NSTextFieldDelegate, PKWidge
     }
     
     private func loadCheckboxState() {
-		self.showLangItem.state              = Defaults[.shouldShowLangItem]          ? .on : .off
-		self.showWifiItem.state              = Defaults[.shouldShowWifiItem]          ? .on : .off
-        self.showNetowrkItem.state           = Defaults[.shouldShowNetworkItem]       ? .on : .off
-        self.showPowerItem.state             = Defaults[.shouldShowPowerItem]         ? .on : .off
-        self.showBatteryIconItem.state       = Defaults[.shouldShowBatteryIcon]       ? .on : .off
-        self.showBatteryPercentageItem.state = Defaults[.shouldShowBatteryPercentage] ? .on : .off
-        self.showDateItem.state              = Defaults[.shouldShowDateItem]          ? .on : .off
+		self.showLangItem.state              = Preferences[.shouldShowLangItem]          ? .on : .off
+		self.showWifiItem.state              = Preferences[.shouldShowWifiItem]          ? .on : .off
+        self.showNetowrkItem.state           = Preferences[.shouldShowNetworkItem]       ? .on : .off
+        self.showPowerItem.state             = Preferences[.shouldShowPowerItem]         ? .on : .off
+        self.showBatteryIconItem.state       = Preferences[.shouldShowBatteryIcon]       ? .on : .off
+        self.showBatteryPercentageItem.state = Preferences[.shouldShowBatteryPercentage] ? .on : .off
+        self.showDateItem.state              = Preferences[.shouldShowDateItem]          ? .on : .off
     }
     
     @IBAction func didChangeCheckboxValue(_ checkbox: NSButton) {

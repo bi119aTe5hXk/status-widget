@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "tinyconstraints",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/roberthein/TinyConstraints",
+      "state" : {
+        "branch" : "master",
+        "revision" : "a89996a77d364eb85abdd09d42d2274e35ba56dc"
+      }
+    }
+  ],
+  "version" : 2
+}

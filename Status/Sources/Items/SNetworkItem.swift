@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Cocoa
 import Defaults
 
 internal class SNetworkItem: StatusItem {
@@ -15,7 +16,7 @@ internal class SNetworkItem: StatusItem {
     /// UI
     private let imageView: NSImageView = NSImageView(frame: NSRect(x: 0, y: 0, width: 80, height: 26))
     
-    var enabled: Bool{ return Defaults[.shouldShowNetworkItem] }
+    var enabled: Bool{ return Preferences[.shouldShowNetworkItem] }
     
     var title: String  { return "network" }
     

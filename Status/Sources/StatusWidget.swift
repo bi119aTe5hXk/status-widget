@@ -26,7 +26,7 @@ extension NSImage {
 
 class StatusWidget: PKWidget {
     
-	static var identifier: String = "StatusWidget"
+    static var identifier: String = "StatusWidget"
     var customizationLabel: String = "Status"
 	var view: NSView!
     
@@ -59,6 +59,9 @@ class StatusWidget: PKWidget {
 	func prepareForCustomization() {
 		clearItems()
 	}
+    func viewWillAppear(){
+        
+    }
 	
     required init() {
 		view = NSStackView(frame: .zero)
@@ -80,6 +83,10 @@ class StatusWidget: PKWidget {
     func viewWillDisappear() {
         clearItems()
 		NotificationCenter.default.removeObserver(self)
+    }
+    
+    func viewDidDisappear(){
+        
     }
     
 	private func clearItems() {
