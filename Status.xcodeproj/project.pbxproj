@@ -20,6 +20,7 @@
 		34E6A281255874FA002693EA /* SLangItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E6A280255874FA002693EA /* SLangItem.swift */; };
 		474C52DD26D161650000FD17 /* SNetworkItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C52DC26D161650000FD17 /* SNetworkItem.swift */; };
 		47BF678C280AB78D00A1D860 /* TinyConstraints in Frameworks */ = {isa = PBXBuildFile; productRef = 47BF678B280AB78D00A1D860 /* TinyConstraints */; };
+		47BF678F280ACC5D00A1D860 /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 47BF678E280ACC5D00A1D860 /* Defaults */; };
 		C1D0E7696EB2EC07C7557D36 /* Pods_Status.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3712FB53353E8D66C89087DD /* Pods_Status.framework */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47BF678F280ACC5D00A1D860 /* Defaults in Frameworks */,
 				C1D0E7696EB2EC07C7557D36 /* Pods_Status.framework in Frameworks */,
 				47BF678C280AB78D00A1D860 /* TinyConstraints in Frameworks */,
 			);
@@ -169,6 +171,7 @@
 			name = Status;
 			packageProductDependencies = (
 				47BF678B280AB78D00A1D860 /* TinyConstraints */,
+				47BF678E280ACC5D00A1D860 /* Defaults */,
 			);
 			productName = Status;
 			productReference = 3401772723D3231D00369905 /* Status.pock */;
@@ -204,6 +207,7 @@
 			mainGroup = 3401771D23D3231D00369905;
 			packageReferences = (
 				47BF678A280AB78D00A1D860 /* XCRemoteSwiftPackageReference "TinyConstraints" */,
+				47BF678D280ACC5C00A1D860 /* XCRemoteSwiftPackageReference "Defaults" */,
 			);
 			productRefGroup = 3401772823D3231D00369905 /* Products */;
 			projectDirPath = "";
@@ -433,14 +437,14 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "-";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 2;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = HR66SGQEZ4;
 				INFOPLIST_FILE = Status/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Application\\ Support/Pock/Widgets";
 				MARKETING_VERSION = 1.2;
-				PRODUCT_BUNDLE_IDENTIFIER = com.pigigaldi.pock.Status2;
+				PRODUCT_BUNDLE_IDENTIFIER = net.bi119aTe5hXk.pock.Status2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
@@ -454,14 +458,14 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_IDENTITY = "-";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 2;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = HR66SGQEZ4;
 				INFOPLIST_FILE = Status/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Application\\ Support/Pock/Widgets";
 				MARKETING_VERSION = 1.2;
-				PRODUCT_BUNDLE_IDENTIFIER = com.pigigaldi.pock.Status2;
+				PRODUCT_BUNDLE_IDENTIFIER = net.bi119aTe5hXk.pock.Status2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
@@ -501,6 +505,14 @@
 				kind = branch;
 			};
 		};
+		47BF678D280ACC5C00A1D860 /* XCRemoteSwiftPackageReference "Defaults" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/Defaults";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -508,6 +520,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 47BF678A280AB78D00A1D860 /* XCRemoteSwiftPackageReference "TinyConstraints" */;
 			productName = TinyConstraints;
+		};
+		47BF678E280ACC5D00A1D860 /* Defaults */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 47BF678D280ACC5C00A1D860 /* XCRemoteSwiftPackageReference "Defaults" */;
+			productName = Defaults;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
