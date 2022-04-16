@@ -59,17 +59,17 @@ class StatusWidgetPreferencePane: NSViewController, NSTextFieldDelegate, PKWidge
         case 1:
             key = .shouldShowWifiItem
         case 2:
-            key = .shouldShowNetworkItem
-        case 3:
-            key = .shouldShowTempFanItem
-        case 4:
             key = .shouldShowPowerItem
-        case 41:
+        case 31:
             key = .shouldShowBatteryIcon
-        case 42:
+        case 32:
             key = .shouldShowBatteryPercentage
-        case 5:
+        case 4:
             key = .shouldShowDateItem
+        case 5:
+            key = .shouldShowNetworkItem
+        case 6:
+            key = .shouldShowTempFanItem
         default:
             return
         }

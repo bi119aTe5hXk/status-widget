@@ -73,8 +73,8 @@ internal class SPowerItem: StatusItem {
     }
     
     private func configureStackView() {
-        stackView.orientation = .horizontal
-        stackView.alignment = .centerY
+        stackView.orientation = .vertical
+        stackView.alignment = .centerX
         stackView.distribution = .fillProportionally
         stackView.spacing = 2
         stackView.addArrangedSubview(valueLabel)
