@@ -41,14 +41,18 @@ class StatusWidget: PKWidget {
 		stackView.alignment = .centerY
 		stackView.distribution = .fill
 		stackView.spacing = 8
-		if Preferences[.shouldShowLangItem] {
-			stackView.addArrangedSubview(SLangItem().view)
-		}
+		
+        if Preferences[.shouldShowNetworkItem] {
+            stackView.addArrangedSubview(SNetworkItem().view)
+        }
+        if Preferences[.shouldShowTempFanItem] {
+            stackView.addArrangedSubview(STempFanItem().view)
+        }
 		if Preferences[.shouldShowWifiItem] {
 			stackView.addArrangedSubview(SWifiItem().view)
 		}
-        if Preferences[.shouldShowNetworkItem] {
-            stackView.addArrangedSubview(SNetworkItem().view)
+        if Preferences[.shouldShowLangItem] {
+            stackView.addArrangedSubview(SLangItem().view)
         }
 		if Preferences[.shouldShowPowerItem] {
 			stackView.addArrangedSubview(SPowerItem().view)
@@ -105,18 +109,24 @@ class StatusWidget: PKWidget {
 	
     @objc private func loadStatusElements() {
 		clearItems()
-		if Preferences[.shouldShowLangItem] {
-			let item = SLangItem()
-			loadedItems.append(item)
-			stackView.addArrangedSubview(item.view)
-		}
+		
+        if Preferences[.shouldShowNetworkItem] {
+            let item = SNetworkItem()
+            loadedItems.append(item)
+            stackView.addArrangedSubview(item.view)
+        }
+        if Preferences[.shouldShowTempFanItem] {
+            let item = STempFanItem()
+            loadedItems.append(item)
+            stackView.addArrangedSubview(item.view)
+        }
 		if Preferences[.shouldShowWifiItem] {
 			let item = SWifiItem()
 			loadedItems.append(item)
 			stackView.addArrangedSubview(item.view)
 		}
-        if Preferences[.shouldShowNetworkItem] {
-            let item = SNetworkItem()
+        if Preferences[.shouldShowLangItem] {
+            let item = SLangItem()
             loadedItems.append(item)
             stackView.addArrangedSubview(item.view)
         }

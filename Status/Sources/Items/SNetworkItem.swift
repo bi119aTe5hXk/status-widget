@@ -3,8 +3,9 @@
 //  Status
 //
 //  Created by bi119aTe5hXk on 2021/08/22.
-//  Copyright © 2021 Pierluigi Galdi. All rights reserved.
+//  Copyright © 2021 bi119aTe5hXk. All rights reserved.
 //
+// https://github.com/iglance/iGlance
 
 import Foundation
 import Cocoa
@@ -14,7 +15,7 @@ internal class SNetworkItem: StatusItem {
     
     private var refreshTimer: Timer?
     /// UI
-    private let imageView: NSImageView = NSImageView(frame: NSRect(x: 0, y: 0, width: 80, height: 26))
+    private let imageView: NSImageView = NSImageView(frame: NSRect(x: 0, y: 0, width: 50, height: 26))
     
     var enabled: Bool{ return Preferences[.shouldShowNetworkItem] }
     
@@ -262,24 +263,25 @@ internal class SNetworkItem: StatusItem {
 
         // get the up arrow icon
         
-        guard let arrowUpIcon = Bundle(for: StatusWidget.self).image(forResource: "ArrowUpIcon")?.tint(color: NSColor.green) else {
-            print("An error occurred while loading the bandwidth arrow up menu bar icon")
-            return nil
-        }
-        // get the down arrow icon
-        
-        guard let arrowDownIcon = Bundle(for: StatusWidget.self).image(forResource: "ArrowDownIcon")?.tint(color: NSColor.red) else {
-            print("An error occurred while loading the bandwidth arrow down menu bar icon")
-            return nil
-        }
+//        guard let arrowUpIcon = Bundle(for: StatusWidget.self).image(forResource: "ArrowUpIcon")?.tint(color: NSColor.green) else {
+//            print("An error occurred while loading the bandwidth arrow up menu bar icon")
+//            return nil
+//        }
+//        // get the down arrow icon
+//
+//        guard let arrowDownIcon = Bundle(for: StatusWidget.self).image(forResource: "ArrowDownIcon")?.tint(color: NSColor.red) else {
+//            print("An error occurred while loading the bandwidth arrow down menu bar icon")
+//            return nil
+//        }
 
         // create the menu bar image for the bandwidth.
         let bandwidthTextWidth = max(CGFloat(55), max(uploadString.size().width, downloadString.size().width))
-        let arrowIconWidth = arrowUpIcon.size.width
-        let marginToIcons = CGFloat(5)
+        //let arrowIconWidth = arrowUpIcon.size.width
+        //let marginToIcons = CGFloat(5)
         let menuBarImage = NSImage(
             size: NSSize(
-                width: bandwidthTextWidth + arrowIconWidth + marginToIcons,
+                width: bandwidthTextWidth,
+                //+ arrowIconWidth + marginToIcons,
                 height: CGFloat(18.0)
             )
         )
@@ -291,7 +293,8 @@ internal class SNetworkItem: StatusItem {
         let uploadStringSize = uploadString.size()
         uploadString.draw(
             at: NSPoint(
-                x: arrowIconWidth + marginToIcons + bandwidthTextWidth - uploadStringSize.width,
+                x:  bandwidthTextWidth - uploadStringSize.width,
+                    //arrowIconWidth + marginToIcons + bandwidthTextWidth - uploadStringSize.width,
                 y: menuBarImage.size.height - 11 // this value was found by trail and error
             )
         )
@@ -299,27 +302,28 @@ internal class SNetworkItem: StatusItem {
         // draw the download string
         let downloadStringsize = downloadString.size()
         // y value was found by trail and error
-        downloadString.draw(at: NSPoint(x: arrowIconWidth + marginToIcons + bandwidthTextWidth - downloadStringsize.width, y: -2))
+        downloadString.draw(at: NSPoint(x: bandwidthTextWidth - downloadStringsize.width, y: -2))
+                                            // arrowIconWidth + marginToIcons + bandwidthTextWidth - downloadStringsize.width, y: -2))
 
         // draw the bandwidth icon in front of the upload and download string
-        arrowUpIcon.draw(
-            at: NSPoint(
-                    x: 0,
-                    y: CGFloat(18.0) - (arrowUpIcon.size.height + (CGFloat(18.0) / 2.0 - arrowUpIcon.size.height))
-                ),
-            from: NSRect.zero,
-            operation: .sourceOver,
-            fraction: 1.0
-        )
-        arrowDownIcon.draw(
-            at: NSPoint(
-                    x: 0,
-                    y: CGFloat(18.0) / 2.0 - arrowDownIcon.size.height
-                ),
-            from: NSRect.zero,
-            operation: .sourceOver,
-            fraction: 1.0
-        )
+//        arrowUpIcon.draw(
+//            at: NSPoint(
+//                    x: 0,
+//                    y: CGFloat(18.0) - (arrowUpIcon.size.height + (CGFloat(18.0) / 2.0 - arrowUpIcon.size.height))
+//                ),
+//            from: NSRect.zero,
+//            operation: .sourceOver,
+//            fraction: 1.0
+//        )
+//        arrowDownIcon.draw(
+//            at: NSPoint(
+//                    x: 0,
+//                    y: CGFloat(18.0) / 2.0 - arrowDownIcon.size.height
+//                ),
+//            from: NSRect.zero,
+//            operation: .sourceOver,
+//            fraction: 1.0
+//        )
 
         // unlock the focous of drawing
         menuBarImage.unlockFocus()

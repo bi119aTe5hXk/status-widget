@@ -18,6 +18,7 @@ class StatusWidgetPreferencePane: NSViewController, NSTextFieldDelegate, PKWidge
 	@IBOutlet weak var showLangItem:			  NSButton!
     @IBOutlet weak var showWifiItem:              NSButton!
     @IBOutlet weak var showNetowrkItem:           NSButton!
+    @IBOutlet weak var showTempFanItem:           NSButton!
     @IBOutlet weak var showPowerItem:             NSButton!
     @IBOutlet weak var showBatteryIconItem:       NSButton!
     @IBOutlet weak var showBatteryPercentageItem: NSButton!
@@ -43,6 +44,7 @@ class StatusWidgetPreferencePane: NSViewController, NSTextFieldDelegate, PKWidge
 		self.showLangItem.state              = Preferences[.shouldShowLangItem]          ? .on : .off
 		self.showWifiItem.state              = Preferences[.shouldShowWifiItem]          ? .on : .off
         self.showNetowrkItem.state           = Preferences[.shouldShowNetworkItem]       ? .on : .off
+        self.showTempFanItem.state           = Preferences[.shouldShowTempFanItem]       ?  .on : .off
         self.showPowerItem.state             = Preferences[.shouldShowPowerItem]         ? .on : .off
         self.showBatteryIconItem.state       = Preferences[.shouldShowBatteryIcon]       ? .on : .off
         self.showBatteryPercentageItem.state = Preferences[.shouldShowBatteryPercentage] ? .on : .off
@@ -59,12 +61,14 @@ class StatusWidgetPreferencePane: NSViewController, NSTextFieldDelegate, PKWidge
         case 2:
             key = .shouldShowNetworkItem
         case 3:
-            key = .shouldShowPowerItem
-        case 31:
-            key = .shouldShowBatteryIcon
-        case 32:
-            key = .shouldShowBatteryPercentage
+            key = .shouldShowTempFanItem
         case 4:
+            key = .shouldShowPowerItem
+        case 41:
+            key = .shouldShowBatteryIcon
+        case 42:
+            key = .shouldShowBatteryPercentage
+        case 5:
             key = .shouldShowDateItem
         default:
             return

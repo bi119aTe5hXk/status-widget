@@ -20,6 +20,8 @@
 		34E6A281255874FA002693EA /* SLangItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E6A280255874FA002693EA /* SLangItem.swift */; };
 		472B7645280B10B2008D8F45 /* Pods_Status.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3712FB53353E8D66C89087DD /* Pods_Status.framework */; };
 		472B7646280B10B2008D8F45 /* Pods_Status.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3712FB53353E8D66C89087DD /* Pods_Status.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		472B764A280B18D0008D8F45 /* temp.m in Sources */ = {isa = PBXBuildFile; fileRef = 472B7649280B18D0008D8F45 /* temp.m */; };
+		472B764C280B1AD6008D8F45 /* STempFanItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472B764B280B1AD6008D8F45 /* STempFanItem.swift */; };
 		474C52DD26D161650000FD17 /* SNetworkItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C52DC26D161650000FD17 /* SNetworkItem.swift */; };
 		47BF678C280AB78D00A1D860 /* TinyConstraints in Frameworks */ = {isa = PBXBuildFile; productRef = 47BF678B280AB78D00A1D860 /* TinyConstraints */; };
 		47BF678F280ACC5D00A1D860 /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = 47BF678E280ACC5D00A1D860 /* Defaults */; };
@@ -41,7 +43,7 @@
 
 /* Begin PBXFileReference section */
 		3401772723D3231D00369905 /* Status.pock */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Status.pock; sourceTree = BUILT_PRODUCTS_DIR; };
-		3401772A23D3231D00369905 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = "<group>"; };
+		3401772A23D3231D00369905 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		3401772C23D3231D00369905 /* StatusWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusWidget.swift; sourceTree = "<group>"; };
 		3401772E23D3231D00369905 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3401773423D323CD00369905 /* StatusItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusItem.swift; sourceTree = "<group>"; };
@@ -59,6 +61,9 @@
 		34E6A27D2558706B002693EA /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		34E6A280255874FA002693EA /* SLangItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SLangItem.swift; sourceTree = "<group>"; };
 		3712FB53353E8D66C89087DD /* Pods_Status.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Status.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		472B7648280B18D0008D8F45 /* Status-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Status-Bridging-Header.h"; sourceTree = "<group>"; };
+		472B7649280B18D0008D8F45 /* temp.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = temp.m; sourceTree = "<group>"; };
+		472B764B280B1AD6008D8F45 /* STempFanItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = STempFanItem.swift; sourceTree = "<group>"; };
 		474C52DC26D161650000FD17 /* SNetworkItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNetworkItem.swift; sourceTree = "<group>"; };
 		9347816283C4AB2AF67D68D4 /* Pods-Status.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Status.release.xcconfig"; path = "Target Support Files/Pods-Status/Pods-Status.release.xcconfig"; sourceTree = "<group>"; };
 		CB926D07BCC33E6C4950E6CD /* Pods-Status.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Status.debug.xcconfig"; path = "Target Support Files/Pods-Status/Pods-Status.debug.xcconfig"; sourceTree = "<group>"; };
@@ -126,6 +131,9 @@
 				3401773723D3241000369905 /* SPowerItem.swift */,
 				3401773823D3241000369905 /* SWifiItem.swift */,
 				474C52DC26D161650000FD17 /* SNetworkItem.swift */,
+				472B764B280B1AD6008D8F45 /* STempFanItem.swift */,
+				472B7649280B18D0008D8F45 /* temp.m */,
+				472B7648280B18D0008D8F45 /* Status-Bridging-Header.h */,
 			);
 			path = Items;
 			sourceTree = "<group>";
@@ -205,6 +213,7 @@
 				TargetAttributes = {
 					3401772623D3231D00369905 = {
 						CreatedOnToolsVersion = 11.0;
+						LastSwiftMigration = 1330;
 					};
 				};
 			};
@@ -300,6 +309,8 @@
 				3401773523D323CD00369905 /* StatusItem.swift in Sources */,
 				3401774C23D325DD00369905 /* StatusWidgetPreferencePane.swift in Sources */,
 				3401773E23D324EF00369905 /* Preferences.swift in Sources */,
+				472B764C280B1AD6008D8F45 /* STempFanItem.swift in Sources */,
+				472B764A280B18D0008D8F45 /* temp.m in Sources */,
 				3401773A23D3241000369905 /* SPowerItem.swift in Sources */,
 				3401773B23D3241000369905 /* SWifiItem.swift in Sources */,
 				34E6A281255874FA002693EA /* SLangItem.swift in Sources */,
@@ -451,18 +462,26 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CB926D07BCC33E6C4950E6CD /* Pods-Status.debug.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = HR66SGQEZ4;
 				INFOPLIST_FILE = Status/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Application\\ Support/Pock/Widgets";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				MARKETING_VERSION = 1.3;
 				OTHER_CODE_SIGN_FLAGS = "--deep";
 				PRODUCT_BUNDLE_IDENTIFIER = net.bi119aTe5hXk.pock.Status2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Status/Sources/Items/Status-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				WRAPPER_EXTENSION = pock;
 			};
@@ -472,18 +491,25 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9347816283C4AB2AF67D68D4 /* Pods-Status.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = HR66SGQEZ4;
 				INFOPLIST_FILE = Status/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Application\\ Support/Pock/Widgets";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				MARKETING_VERSION = 1.3;
 				OTHER_CODE_SIGN_FLAGS = "--deep";
 				PRODUCT_BUNDLE_IDENTIFIER = net.bi119aTe5hXk.pock.Status2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Status/Sources/Items/Status-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				WRAPPER_EXTENSION = pock;
 			};
