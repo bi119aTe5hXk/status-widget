@@ -11,7 +11,6 @@ import Foundation
 import Cocoa
 
 
-
 internal class STempFanItem: StatusItem {
     //var currentNames: [Any] = [],
         //voltageNames: [Any] = [],
@@ -20,6 +19,9 @@ internal class STempFanItem: StatusItem {
     //var currentValues: [Any] = [],
         //voltageValues: [Any] = [],
     var    thermalValues: [Any] = []
+    
+    private var fanCount: Int = 0
+    let faninfo = FanInfo.init()
     
     private var refreshTimer: Timer?
     
@@ -32,6 +34,9 @@ internal class STempFanItem: StatusItem {
     var view: NSView { return imageView }
     
     init() {
+        
+        fanCount = faninfo.getNumberOfFans()
+        
         didLoad()
         reload()
     }
@@ -71,15 +76,30 @@ internal class STempFanItem: StatusItem {
             }
         }
         let avgtemp = sumtemp / Float(count)
-        print(avgtemp)
+//        print(avgtemp)
+        
+    
+        var curMaxFanSpeed = 0
+        for id in 0..<fanCount {
+            // get the fan speed for the current fan
+            let currentFanSpeed = faninfo.getCurrentFanSpeed(id: id)
+            //let maxFanSpeed = faninfo.getMaxFanSpeed(id: id)
+            //let minFanSpeed = faninfo.getMinFanSpeed(id: id)
+            if curMaxFanSpeed < currentFanSpeed {
+                curMaxFanSpeed = currentFanSpeed
+            }
+        }
+        print(curMaxFanSpeed)
         
         
-        let menuBarImage = createMenuBarImage(upper: "\(String(format:"%.02f", avgtemp))°C", lower: "unknown RPM")
+        let menuBarImage = createMenuBarImage(upper: "\(String(format:"%.01f", avgtemp)) °C", lower: "\(curMaxFanSpeed) RPM")
          
         
         DispatchQueue.main.async { [weak self] in
             self?.imageView.image = menuBarImage
         }
+        
+    
     }
     
     func didLoad() {
@@ -120,12 +140,12 @@ internal class STempFanItem: StatusItem {
         
         
 
-        // create the menu bar image for the bandwidth.
-        let textWidth = max(CGFloat(60), max(upperStrAttr.size().width, lowerStrAttr.size().width))
+        // create the menu bar image.
+        let textWidth = max(CGFloat(40), max(upperStrAttr.size().width, lowerStrAttr.size().width))
         let menuBarImage = NSImage(
             size: NSSize(
                 width: textWidth,
-                height: CGFloat(18.0)
+                height: CGFloat(20.0)
             )
         )
 
@@ -137,14 +157,14 @@ internal class STempFanItem: StatusItem {
         upperStrAttr.draw(
             at: NSPoint(
                 x:  textWidth - upperStringSize.width,
-                y: menuBarImage.size.height - 11 // this value was found by trail and error
+                y: menuBarImage.size.height - 9 // this value was found by trail and error
             )
         )
 
         // draw the lower string
         let lowerStringsize = lowerStrAttr.size()
         // y value was found by trail and error
-        lowerStrAttr.draw(at: NSPoint(x: textWidth - lowerStringsize.width, y: -2))
+        lowerStrAttr.draw(at: NSPoint(x: textWidth - lowerStringsize.width, y: -1))
 
 
         // unlock the focous of drawing

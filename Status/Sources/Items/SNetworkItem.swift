@@ -275,14 +275,14 @@ internal class SNetworkItem: StatusItem {
 //        }
 
         // create the menu bar image for the bandwidth.
-        let bandwidthTextWidth = max(CGFloat(55), max(uploadString.size().width, downloadString.size().width))
+        let bandwidthTextWidth = max(CGFloat(40), max(uploadString.size().width, downloadString.size().width))
         //let arrowIconWidth = arrowUpIcon.size.width
         //let marginToIcons = CGFloat(5)
         let menuBarImage = NSImage(
             size: NSSize(
                 width: bandwidthTextWidth,
                 //+ arrowIconWidth + marginToIcons,
-                height: CGFloat(18.0)
+                height: CGFloat(20.0)
             )
         )
 
@@ -295,7 +295,7 @@ internal class SNetworkItem: StatusItem {
             at: NSPoint(
                 x:  bandwidthTextWidth - uploadStringSize.width,
                     //arrowIconWidth + marginToIcons + bandwidthTextWidth - uploadStringSize.width,
-                y: menuBarImage.size.height - 11 // this value was found by trail and error
+                y: menuBarImage.size.height - 10 // this value was found by trail and error
             )
         )
 

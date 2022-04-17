@@ -76,7 +76,7 @@ internal class SPowerItem: StatusItem {
         stackView.orientation = .vertical
         stackView.alignment = .centerX
         stackView.distribution = .fillProportionally
-        stackView.spacing = 2
+        stackView.spacing = 0
         stackView.addArrangedSubview(valueLabel)
         stackView.addArrangedSubview(iconView)
     }
