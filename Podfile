@@ -33,5 +33,6 @@ post_install do |installer|
     contents = File.read(path)
     updated = contents.gsub("DT_TOOLCHAIN_DIR", "TOOLCHAIN_DIR")
     File.write(path, updated) if updated != contents
+  end
 end
 
