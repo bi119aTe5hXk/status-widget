@@ -15,7 +15,8 @@ internal class SNetworkItem: StatusItem {
     
     private var refreshTimer: Timer?
     /// UI
-    private let imageView: NSImageView = NSImageView(frame: NSRect(x: 0, y: 0, width: 50, height: 26))
+    private let fixedImageWidth = CGFloat(62)
+    private let imageView: NSImageView = NSImageView(frame: NSRect(x: 0, y: 0, width: 62, height: 26))
     
     var enabled: Bool{ return Preferences[.shouldShowNetworkItem] }
     
@@ -275,7 +276,7 @@ internal class SNetworkItem: StatusItem {
 //        }
 
         // create the menu bar image for the bandwidth.
-        let bandwidthTextWidth = max(CGFloat(40), max(uploadString.size().width, downloadString.size().width))
+        let bandwidthTextWidth = fixedImageWidth
         //let arrowIconWidth = arrowUpIcon.size.width
         //let marginToIcons = CGFloat(5)
         let menuBarImage = NSImage(

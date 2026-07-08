@@ -45,6 +45,9 @@ class StatusWidget: PKWidget {
         if Preferences[.shouldShowNetworkItem] {
             stackView.addArrangedSubview(SNetworkItem().view)
         }
+        if Preferences[.shouldShowSystemItem] {
+            stackView.addArrangedSubview(SSystemItem().view)
+        }
         if Preferences[.shouldShowTempFanItem] {
             stackView.addArrangedSubview(STempFanItem().view)
         }
@@ -112,6 +115,11 @@ class StatusWidget: PKWidget {
 		
         if Preferences[.shouldShowNetworkItem] {
             let item = SNetworkItem()
+            loadedItems.append(item)
+            stackView.addArrangedSubview(item.view)
+        }
+        if Preferences[.shouldShowSystemItem] {
+            let item = SSystemItem()
             loadedItems.append(item)
             stackView.addArrangedSubview(item.view)
         }

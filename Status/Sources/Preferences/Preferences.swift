@@ -18,6 +18,7 @@ internal struct Preferences {
         case shouldShowWifiItem
         case shouldShowNetworkItem
         case shouldShowTempFanItem
+        case shouldShowSystemItem
         case shouldShowPowerItem
         case shouldShowBatteryIcon
         case shouldShowBatteryPercentage
@@ -35,6 +36,8 @@ internal struct Preferences {
                 case .shouldShowNetworkItem:
                     return true as! T
                 case .shouldShowTempFanItem:
+                    return true as! T
+                case .shouldShowSystemItem:
                     return true as! T
                 case .shouldShowPowerItem:
                     return true as! T
@@ -59,6 +62,7 @@ internal struct Preferences {
         Preferences[.shouldShowWifiItem] = true
         Preferences[.shouldShowNetworkItem] = true
         Preferences[.shouldShowTempFanItem] = true
+        Preferences[.shouldShowSystemItem] = true
         Preferences[.shouldShowPowerItem] = true
         Preferences[.shouldShowBatteryIcon] = true
         Preferences[.shouldShowBatteryPercentage] = true

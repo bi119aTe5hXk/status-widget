@@ -199,11 +199,49 @@ NSArray* returnThermalValues() {
     return CFBridgingRelease(getThermalValues(currentSensors));
 }
 
+NSArray* thermalSensorSnapshots() {
+    CFDictionaryRef thermalSensors = matching(0xff00, 5);
+    IOHIDEventSystemClientRef system = IOHIDEventSystemClientCreate(kCFAllocatorDefault);
+    NSMutableArray *readings = [NSMutableArray array];
+
+    if (!system || !thermalSensors) {
+        if (thermalSensors) { CFRelease(thermalSensors); }
+        if (system) { CFRelease(system); }
+        return readings;
+    }
+
+    IOHIDEventSystemClientSetMatching(system, thermalSensors);
+    CFArrayRef services = IOHIDEventSystemClientCopyServices(system);
+
+    if (services) {
+        CFIndex count = CFArrayGetCount(services);
+        for (CFIndex i = 0; i < count; i++) {
+            IOHIDServiceClientRef service = (IOHIDServiceClientRef)CFArrayGetValueAtIndex(services, i);
+            CFTypeRef nameRef = IOHIDServiceClientCopyProperty(service, CFSTR("Product"));
+            NSString *name = nameRef ? CFBridgingRelease(nameRef) : @"Unknown";
+            IOHIDEventRef event = IOHIDServiceClientCopyEvent(service, kIOHIDEventTypeTemperature, 0, 0);
+            double temperature = 0;
+
+            if (event) {
+                temperature = IOHIDEventGetFloatValue(event, IOHIDEventFieldBase(kIOHIDEventTypeTemperature));
+                CFRelease(event);
+            }
+
+            [readings addObject:@{@"name": name, @"value": @(temperature)}];
+        }
+        CFRelease(services);
+    }
+
+    CFRelease(thermalSensors);
+    CFRelease(system);
+    return readings;
+}
+
 
 //extern uint64_t my_mhz(void);
 //extern void mybat(void);
 
-#if 1
+#if 0
 int main () {
     //  Primary Usage Page:
     //    kHIDPage_AppleVendor                        = 0xff00,

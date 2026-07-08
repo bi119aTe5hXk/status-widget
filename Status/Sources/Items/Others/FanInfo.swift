@@ -16,14 +16,29 @@
 import Foundation
 
 class FanInfo {
+    private static var didOpenSMC = false
+
+    init() {
+        if !FanInfo.didOpenSMC {
+            do {
+                try SMCKit.open()
+                FanInfo.didOpenSMC = true
+            } catch SMCKit.SMCError.driverNotFound {
+                print("SMC driver was not found")
+            } catch SMCKit.SMCError.failedToOpen {
+                print("Failed to open SMC")
+            } catch {
+                print("An unknown error occurred while opening the SMC")
+            }
+        }
+    }
+
     /**
      * Returns the number of fans of the machine. If an error occurred the function returns 0.
      */
     func getNumberOfFans() -> Int {
         do {
             let numFans = try SMCKit.fanCount()
-
-            print("Read fan count: \(numFans)")
 
             return numFans
         } catch SMCKit.SMCError.keyNotFound {
@@ -44,8 +59,6 @@ class FanInfo {
         do {
             let minFanSpeed = try SMCKit.fanMinSpeed(id)
 
-            print("Read min fan speed: \(minFanSpeed)")
-
             return minFanSpeed
         } catch SMCKit.SMCError.keyNotFound {
             print("SMCKey to read the minimum fan speed was not found")
@@ -65,8 +78,6 @@ class FanInfo {
         do {
             let maxFanSpeed = try SMCKit.fanMaxSpeed(id)
 
-            print("Read max fan speed: \(maxFanSpeed)")
-
             return maxFanSpeed
         } catch SMCKit.SMCError.keyNotFound {
             print("SMCKey to read the maximum fan speed was not found")
@@ -85,8 +96,6 @@ class FanInfo {
     func getCurrentFanSpeed(id: Int) -> Int {
         do {
             let curFanSpeed = try SMCKit.fanCurrentSpeed(id)
-
-            print("Read current fan speed: \(curFanSpeed)")
 
             return curFanSpeed
         } catch SMCKit.SMCError.keyNotFound {

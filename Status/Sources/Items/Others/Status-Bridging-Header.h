@@ -16,3 +16,4 @@ extern NSArray* thermalArray();
 extern NSArray* returnCurrentValues();
 extern NSArray* returnVoltageValues();
 extern NSArray* returnThermalValues();
+extern NSArray* thermalSensorSnapshots();
