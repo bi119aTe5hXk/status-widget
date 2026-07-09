@@ -13,6 +13,7 @@
                 <outlet property="showLangItem" destination="CeL-4T-GtO" id="gTl-Nu-z0R"/>
                 <outlet property="showNetowrkItem" destination="b2i-9G-57Q" id="cgA-Kv-ahN"/>
                 <outlet property="showPowerItem" destination="P4F-Aq-avh" id="GQA-CU-urZ"/>
+                <outlet property="showSystemItem" destination="sys-cpu-mem" id="sys-out-let"/>
                 <outlet property="showTempFanItem" destination="hcP-cA-P2L" id="qq4-9c-aBE"/>
                 <outlet property="showWifiItem" destination="2QA-fb-vdC" id="wvf-Iq-9Ka"/>
                 <outlet property="timeFormatTextField" destination="fXD-5d-Dqf" id="wQw-2w-3mb"/>
@@ -25,7 +26,7 @@
             <rect key="frame" x="0.0" y="0.0" width="392" height="473"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <stackView distribution="fillEqually" orientation="vertical" alignment="leading" spacing="33" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oAr-3p-C2k">
+                <stackView distribution="fillEqually" orientation="vertical" alignment="leading" spacing="25" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oAr-3p-C2k">
                     <rect key="frame" x="20" y="20" width="352" height="414"/>
                     <subviews>
                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CeL-4T-GtO">
@@ -58,9 +59,19 @@
                                 <action selector="didChangeCheckboxValue:" target="-2" id="yrf-Xl-czR"/>
                             </connections>
                         </button>
+                        <button verticalHuggingPriority="750" tag="7" translatesAutoresizingMaskIntoConstraints="NO" id="sys-cpu-mem">
+                            <rect key="frame" x="-2" y="274" width="190" height="18"/>
+                            <buttonCell key="cell" type="check" title="Show CPU / Memory item" bezelStyle="regularSquare" imagePosition="left" inset="2" id="sys-cpu-cell">
+                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                            <connections>
+                                <action selector="didChangeCheckboxValue:" target="-2" id="sys-cpu-act"/>
+                            </connections>
+                        </button>
                         <button verticalHuggingPriority="750" tag="6" translatesAutoresizingMaskIntoConstraints="NO" id="hcP-cA-P2L">
                             <rect key="frame" x="-2" y="250" width="180" height="18"/>
-                            <buttonCell key="cell" type="check" title="Show cpu temp / fan item" bezelStyle="regularSquare" imagePosition="left" inset="2" id="Tlp-sG-FPJ">
+                            <buttonCell key="cell" type="check" title="Show Temperature / Fan item" bezelStyle="regularSquare" imagePosition="left" inset="2" id="Tlp-sG-FPJ">
                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
@@ -162,6 +173,7 @@
                         <constraint firstItem="0iY-fD-cWj" firstAttribute="leading" secondItem="oAr-3p-C2k" secondAttribute="leading" constant="20" id="muY-gT-4J6"/>
                     </constraints>
                     <visibilityPriorities>
+                        <integer value="1000"/>
                         <integer value="1000"/>
                         <integer value="1000"/>
                         <integer value="1000"/>

@@ -40,16 +40,12 @@ class StatusWidget: PKWidget {
 		stackView.orientation = .horizontal
 		stackView.alignment = .centerY
 		stackView.distribution = .fill
-		stackView.spacing = 8
+		stackView.spacing = 2
 		
-        if Preferences[.shouldShowNetworkItem] {
-            stackView.addArrangedSubview(SNetworkItem().view)
-        }
-        if Preferences[.shouldShowSystemItem] {
-            stackView.addArrangedSubview(SSystemItem().view)
-        }
-        if Preferences[.shouldShowTempFanItem] {
-            stackView.addArrangedSubview(STempFanItem().view)
+        for identifier in Preferences.primaryItemOrder {
+            if let item = makePrimaryItem(identifier) {
+                stackView.addArrangedSubview(item.view)
+            }
         }
 		if Preferences[.shouldShowWifiItem] {
 			stackView.addArrangedSubview(SWifiItem().view)
@@ -57,9 +53,6 @@ class StatusWidget: PKWidget {
         if Preferences[.shouldShowLangItem] {
             stackView.addArrangedSubview(SLangItem().view)
         }
-		if Preferences[.shouldShowPowerItem] {
-			stackView.addArrangedSubview(SPowerItem().view)
-		}
 		if Preferences[.shouldShowDateItem] {
 			stackView.addArrangedSubview(SClockItem().view)
 		}
@@ -67,7 +60,7 @@ class StatusWidget: PKWidget {
 	}
 	
 	func prepareForCustomization() {
-		clearItems()
+		// The customization snapshot uses separate item views; keep the live Touch Bar intact.
 	}
     func viewWillAppear(){
         
@@ -78,7 +71,7 @@ class StatusWidget: PKWidget {
 		stackView.orientation = .horizontal
 		stackView.alignment = .centerY
 		stackView.distribution = .fill
-		stackView.spacing = 8
+		stackView.spacing = 2
     }
     
     deinit {
@@ -99,7 +92,7 @@ class StatusWidget: PKWidget {
         
     }
     
-	private func clearItems() {
+    private func clearItems() {
 		for view in stackView.arrangedSubviews {
 			stackView.removeArrangedSubview(view)
 			view.removeFromSuperview()
@@ -109,40 +102,39 @@ class StatusWidget: PKWidget {
 		}
 		loadedItems.removeAll()
 	}
+
+    private func makePrimaryItem(_ identifier: PrimaryStatusItem) -> StatusItem? {
+        switch identifier {
+        case .network:
+            return Preferences[.shouldShowNetworkItem] ? SNetworkItem() : nil
+        case .system:
+            return Preferences[.shouldShowSystemItem] ? SSystemItem() : nil
+        case .temperatureFan:
+            return Preferences[.shouldShowTempFanItem] ? STempFanItem() : nil
+        case .power:
+            return Preferences[.shouldShowPowerItem] ? SPowerItem() : nil
+        }
+    }
 	
     @objc private func loadStatusElements() {
 		clearItems()
 		
-        if Preferences[.shouldShowNetworkItem] {
-            let item = SNetworkItem()
-            loadedItems.append(item)
-            stackView.addArrangedSubview(item.view)
-        }
-        if Preferences[.shouldShowSystemItem] {
-            let item = SSystemItem()
-            loadedItems.append(item)
-            stackView.addArrangedSubview(item.view)
-        }
-        if Preferences[.shouldShowTempFanItem] {
-            let item = STempFanItem()
-            loadedItems.append(item)
-            stackView.addArrangedSubview(item.view)
+        for identifier in Preferences.primaryItemOrder {
+            if let item = makePrimaryItem(identifier) {
+                loadedItems.append(item)
+                stackView.addArrangedSubview(item.view)
+            }
         }
 		if Preferences[.shouldShowWifiItem] {
 			let item = SWifiItem()
-			loadedItems.append(item)
-			stackView.addArrangedSubview(item.view)
-		}
+            loadedItems.append(item)
+            stackView.addArrangedSubview(item.view)
+        }
         if Preferences[.shouldShowLangItem] {
             let item = SLangItem()
             loadedItems.append(item)
             stackView.addArrangedSubview(item.view)
         }
-		if Preferences[.shouldShowPowerItem] {
-			let item = SPowerItem()
-			loadedItems.append(item)
-			stackView.addArrangedSubview(item.view)
-		}
 		if Preferences[.shouldShowDateItem] {
 			let item = SClockItem()
 			loadedItems.append(item)
